@@ -28,14 +28,14 @@ interpret' _ tape = return tape
 
 
 loop :: Int -> [Char] -> String -> Tape -> IO Tape
-loop depth accu code@(c:cs) tape@(TP seq i)   | c == ']' && depth == 0 = loop' accu cs tape
-                                                | c == ']' = loop (depth - 1) (accu ++ [c]) cs tape
-                                                | c == '[' = loop (depth + 1) (accu ++ [c]) cs tape
-                                                | otherwise = loop depth (accu ++ [c]) cs tape
-                                                    where
-                                                        loop' :: [Char] -> String -> Tape -> IO Tape
-                                                        loop' accu code tape@(TP seq i)   | S.index seq i /= 0 = interpret' accu tape >>= loop' accu code 
-                                                                                            | otherwise = interpret' code tape
+loop depth accu code@(c:cs) tape@(TP seq i) | c == ']' && depth == 0 = loop' accu cs tape
+                                            | c == ']' = loop (depth - 1) (accu ++ [c]) cs tape
+                                            | c == '[' = loop (depth + 1) (accu ++ [c]) cs tape
+                                            | otherwise = loop depth (accu ++ [c]) cs tape
+                                                where
+                                                    loop' :: [Char] -> String -> Tape -> IO Tape
+                                                    loop' accu code tape@(TP seq i) | S.index seq i /= 0 = interpret' accu tape >>= loop' accu code 
+                                                                                    | otherwise = interpret' code tape
 loop _ _ _ _ = error "']' needed after '['"
 
 
