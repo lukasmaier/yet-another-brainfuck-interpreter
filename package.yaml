@@ -1,0 +1,39 @@
+name:                yet-another-brainfuck-interpreter
+version:             0.1.0.0
+github:              "lukasmaier/yet-another-brainfuck-interpreter"
+license:             BSD3
+author:              "Lukas Maier"
+maintainer:          "lukasmaier21@hotmail.de"
+copyright:           "Copyright (c) 2019 Lukas Maier"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/lukasmaier/yet-another-brainfuck-interpreter#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- containers
+
+library:
+  source-dirs: src
+
+executables:
+  yet-another-brainfuck-interpreter-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - yet-another-brainfuck-interpreter
+    - directory
