@@ -1,4 +1,4 @@
-module Interpreter where
+module Interpreter (interpret) where
 
 import qualified Data.Sequence as S
 
